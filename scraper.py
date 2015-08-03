@@ -51,13 +51,14 @@ def parse_page(state="vic", area="inner-east", region="melbourne-region", suburb
         #print item
 
         # Write out to the sqlite database using scraperwiki library
-        scraperwiki.sqlite.save(unique_keys=['address'],
+        scraperwiki.sqlite.save(unique_keys=['address', 'searched_for'],
                                 data={
                                     "link": item["link"],
                                     "address": item["address"],
                                     "price": item["price"],
                                     "beds": item["beds"],
-                                    "extracted_on": extractedOn
+                                    "extracted_on": extractedOn,
+                                    "searched_for": "%s,%s,%s,%s,%d" % (state,region,area,suburb,page)
                                 })
 
 
