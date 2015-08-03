@@ -5,15 +5,21 @@ import scraperwiki
 from lxml import html
 from datetime import datetime
 import csv
+import urllib
 
 extractedOn = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
 
-def parse_page(state="vic", area="inner-east", region="melbourne-region", suburb="carnegie"):
+def parse_page(state="vic", area="inner-east", region="melbourne-region", suburb="carnegie", postcode="3162", page=1):
     # Read in a page
-    html_string = scraperwiki.scrape(
-        "http://www.domain.com.au/search/buy/state/%s/area/%s/region/%s/suburb/%s" % \
+    url_root = "http://www.domain.com.au/search/buy/state/%s/area/%s/region/%s/suburb/%s/?" % \
         (state, area, region, suburb)
-    )
+
+    #/?ssubs=1&searchterm=caulfield%2c+vic%2c+3162&page=1
+    html_string = scraperwiki.scrape(url_root + urllib.urlencode({
+        "ssubs": "1",
+        "searchterm": "%s,%s,%s" % (suburb, state, postcode),
+        "page": page
+    }))
 
     # Find something on the page using css selectors
     root = html.fromstring(html_string)
@@ -42,6 +48,8 @@ def parse_page(state="vic", area="inner-east", region="melbourne-region", suburb
         if len(beds_elem)>0:
             item["beds"]=beds_elem[0].strip()
 
+        print item
+
         # Write out to the sqlite database using scraperwiki library
         scraperwiki.sqlite.save(unique_keys=['address', 'extracted_on'],
                                 data={
@@ -56,6 +64,11 @@ def parse_page(state="vic", area="inner-east", region="melbourne-region", suburb
 dictReader = csv.DictReader(open('suburbs.csv', 'rb'))
 
 for line in dictReader:
-    for page in range(1, int(line['pages'])):
-        # Read in a page
-        parse_page(line['suburb'], line['state'], page)
+    for page_no in range(1,int(line["pages"])):
+        parse_page(
+            state=line["state"],
+            area=line["area"],
+            region=line["region"],
+            suburb=line["suburb"],
+            postcode=line["postcode"],
+            page=page_no)
