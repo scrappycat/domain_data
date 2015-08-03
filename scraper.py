@@ -48,7 +48,7 @@ def parse_page(state="vic", area="inner-east", region="melbourne-region", suburb
         if len(beds_elem)>0:
             item["beds"]=beds_elem[0].strip()
 
-        print item
+        #print item
 
         # Write out to the sqlite database using scraperwiki library
         scraperwiki.sqlite.save(unique_keys=['address', 'extracted_on'],
