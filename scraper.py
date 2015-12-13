@@ -8,10 +8,10 @@ import csv
 import urllib
 
 # Purge the data
-try:
-	scraperwiki.sqlite.execute('DELETE FROM DATA')
-except:
-	print "Data not found yet. Continuing..."
+#try:
+#	scraperwiki.sqlite.execute('DELETE FROM DATA')
+#except:
+#	print "Data not found yet. Continuing..."
 
 extractedOn = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
 
@@ -65,7 +65,7 @@ def parse_page(state="vic", area="inner-east", region="melbourne-region", suburb
 		# print item
 
 		# Write out to the sqlite database using scraperwiki library
-		scraperwiki.sqlite.save(unique_keys=['address'],
+		scraperwiki.sqlite.save(unique_keys=['address','suburb'],
 								data={
 									"link": item["link"],
 									"address": item["address"],
