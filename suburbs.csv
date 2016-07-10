@@ -1,15 +1,15 @@
 state,area,region,suburb,postcode,pages
-vic,inner-east,melbourne-region,carnegie,3163,5
-vic,east,melbourne-region,caulfield,3162,5
-vic,east,melbourne-region,caulfield-south,3162,5
+vic,inner-east,melbourne-region,carnegie,3163,7
+vic,east,melbourne-region,caulfield,3162,7
+vic,east,melbourne-region,caulfield-south,3162,7
 vic,inner-east,melbourne-region,ashburton,3147,4
-vic,inner-east,melbourne-region,murrumbeena,3163,5
-vic,east,melbourne-region,ormond,3204,5
-vic,bayside,melbourne-region,brighton-east,3187,5
-vic,bayside,melbourne-region,bentleigh,3204,5
-vic,bayside,melbourne-region,sandringham,3191,5
-vic,bayside,melbourne-region,cheltenham,3192,5
-vic,bayside,melbourne-region,highett,3190,5
-vic,bayside,melbourne-region,beaumaris,3193,5
+vic,inner-east,melbourne-region,murrumbeena,3163,7
+vic,east,melbourne-region,ormond,3204,7
+vic,bayside,melbourne-region,brighton-east,3187,7
+vic,bayside,melbourne-region,bentleigh,3204,7
+vic,bayside,melbourne-region,sandringham,3191,7
+vic,bayside,melbourne-region,cheltenham,3192,7
+vic,bayside,melbourne-region,highett,3190,7
+vic,bayside,melbourne-region,beaumaris,3193,7
 
 

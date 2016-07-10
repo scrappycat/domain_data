@@ -34,7 +34,7 @@ def parse_page(state="vic", area="inner-east", region="melbourne-region", suburb
 
     # Find something on the page using css selectors
     root = html.fromstring(html_string)
-    for elem in root.xpath('//a[@class="listing-result__listing "]'):
+    for elem in root.xpath('//div[@class="listing-result__listing "]'):
         # print "---"
         # print etree.tostring(elem)
         # print "---"
@@ -47,7 +47,7 @@ def parse_page(state="vic", area="inner-east", region="melbourne-region", suburb
             "beds": "",
         }
 
-        link_elem = elem.xpath("./@href")
+        link_elem = elem.xpath('.//a[@class="listing-result__listing"]/@href')
         if len(link_elem) > 0:
             item["link"] = "http://domain.com.au%s" % link_elem[0]
 
@@ -61,13 +61,13 @@ def parse_page(state="vic", area="inner-east", region="melbourne-region", suburb
 
         price_elem = elem.xpath('.//h2[@class="listing-result__price"]/text()')
         if len(price_elem) > 0:
-            item["price"] = price_elem[0]
+            item["price"] = "".join(price_elem[0].split("\\n")).strip()
 
         beds_elem = elem.xpath('.//span[@class="listing-result__feature-bed"]/text()')
         if len(beds_elem) > 0:
             item["beds"] = beds_elem[0].strip()
 
-        # print item
+        print item
 
         # Write out to the sqlite database using scraperwiki library
         scraperwiki.sqlite.save(unique_keys=['address', 'suburb'],
