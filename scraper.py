@@ -26,6 +26,8 @@ def parse_page(state="vic", area="inner-east", region="melbourne-region", suburb
     page_address = url_root + urllib.urlencode(
             {"ssubs": "1", "searchterm": "%s,%s,%s" % (suburb, state, postcode), "page": page})
 
+    # print page_address
+
     page_redirected_address = urllib2.urlopen(page_address).geturl()
 
     print "Scraping " + page_redirected_address
